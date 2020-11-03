@@ -1,0 +1,52 @@
+{% extends "app/base_template.html" %}
+
+{% block content %}
+
+{% if form.errors %}
+<p>Your username and password didn't match. Please try again.</p>
+{% endif %}
+
+{% if next %}
+    {% if user.is_authenticated %}
+    <p>Your account doesn't have access to this page. To proceed,
+    please login with an account that has access.</p>
+    {% else %}
+    <p>Please login to see this page.</p>
+    {% endif %}
+{% endif %}
+
+<div class="card mb-3">
+  <div class="card-body align-items-center text-center">
+
+    <form method="post" action="">
+    {% csrf_token %}
+    <table>
+    <tr>
+        <td>{{ form.username.label_tag }}</td>
+        <td>{{ form.username }}</td>
+    </tr>
+    <tr>
+        <td>{{ form.password.label_tag }}</td>
+        <td>{{ form.password }}</td>
+    </tr>
+    </table>
+    <input class="btn btn-sm btn-outline-secondary" type="submit" value="Log In">
+    <input type="hidden" name="next" value="{{ next }}">
+    <div class="btn-group">
+      <a href="" class="btn btn-sm btn-outline-secondary disabled">Reset Password</a>
+    </div>
+    </form>
+
+  </div>
+</div>
+
+<div class="btn-group float-right">
+  <a href="{% url 'user:create_user' %}" class="btn btn-sm btn-outline-secondary">Create Account</a>
+</div>
+
+
+
+
+
+
+{% endblock %}

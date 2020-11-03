@@ -1,0 +1,29 @@
+{% extends "app/base_template.html" %}
+
+{% block content %}
+
+
+
+
+
+
+  <h2>Login</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Login</button>
+  </form>
+
+
+
+<input class="btn btn-sm btn-outline-secondary" type="submit" value="Log In">
+<input type="hidden" name="next" value="{{ next }}">
+<div class="btn-group">
+  <a href="" class="btn btn-sm btn-outline-secondary">Reset Password</a>
+</div>
+
+
+{# Assumes you setup the password_reset view in your URLconf #}
+
+
+{% endblock %}
