@@ -1,0 +1,37 @@
+{% extends "app/base_template.html" %}
+
+{% block content %}
+
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title"><a href="{% url 'app:course_view' course.course_title %}" style="text-decoration: none; color: black">{{ course.course_title }} </a></h5>
+    <p class="card-text">{{ course.course_description }}</p>
+  </div>
+</div>
+
+<div class="row">
+{% for lesson in lessons %}
+  {% if lesson.course == course %}
+    <div class="col-md-4">
+      <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+          <p class="card-title">{{ lesson.lesson_title }}</p>
+          <p class="card-text">{{ lesson.lesson_description }}</p>
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="btn-group">
+              <a href="{% url 'app:lesson_view' course.course_title lesson.lesson_id %}" class="btn btn-sm btn-outline-secondary">View</a>
+            </div>
+            <small class="text-muted">{{ lesson.date_posted }}</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+{% empty %}
+  <div class="col-md-12">
+    <p>There are no lessons.</p>
+  </div>
+{% endfor %}
+</div>
+
+{% endblock %}

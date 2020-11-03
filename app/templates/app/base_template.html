@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  {% block title %}<title>Student App</title>{% endblock %}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="{% url 'app:index' %}">
+      <!-- De pus path catre logo -->
+      <img src="" width="30" height="30" class="d-inline-block align-top" alt="">
+      Student App
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'app:index' %}">Home <span class="sr-only">(current)</span></a>
+        </li>
+      </ul>
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'user:user_page' %}">Account <span class="sr-only">(current)</span></a>
+        </li>
+      </ul>
+      {% if request.user.is_authenticated %}
+      <!-- De Facut LOGout -->
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'user:logout' %}?next={% url 'app:index' %}">Log Out <span class="sr-only">(current)</span></a>
+        </li>
+      </ul>
+      {% endif %}
+
+      <!--
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+      -->
+    </div>
+  </nav>
+
+  <div class="container">
+    {% block content %}{% endblock %}
+  </div>
+
+  <footer class="text-muted"  style="margin-top: 5%;">
+    <div class="container-fluid">
+      <p class="float-right"><a href="#" style="text-decoration: none; color: black">Back to top</a></p>
+      <p>&copy; Denis Szoke 2020</p>
+      <p>This site was made as a project for VVS.</p>
+    </div>
+  </footer>
+
+
+</body>
+
+</html>
