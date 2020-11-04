@@ -1,12 +1,12 @@
-from django.test import TestCase
+from django.test import TestCase, RequestFactory
+from django.contrib.auth.models import AnonymousUser, User
+from django.db import transaction, utils
 
 from .models import Profile, LessonsForEachUser
 from app.models import Course, Lesson
-
-from django.contrib.auth.models import AnonymousUser, User
-from django.test import RequestFactory, TestCase
-
 from .views import user
+
+import datetime
 
 
 class UserTest(TestCase):
@@ -14,7 +14,6 @@ class UserTest(TestCase):
         self.factory = RequestFactory()
         self.user = User.objects.create_user(
             username='denis', email='denis@mail.com', password='top_secret')
-
 
     def tearDown(self):
         User.objects.get(username='denis').delete()
@@ -34,3 +33,25 @@ class UserTest(TestCase):
         response = user(request)
 
         self.assertEqual(response.status_code, 302)
+
+    def test_create_profile_for_user(self):
+        user = User.objects.get(username='denis')
+        profile = Profile.objects.create(user=user,
+                                         birth_date=datetime.date(
+                                             1998, 12, 24),
+                                         )
+        expected_profile = Profile.objects.get(user=user)
+        self.assertEqual(profile, expected_profile)
+
+    def test_create_duplicate_profile_for_user(self):
+        user = User.objects.get(username='denis')
+        profile = Profile.objects.create(user=user,
+                                         birth_date=datetime.date(
+                                             1998, 12, 24),
+                                         )
+        with self.assertRaises(utils.IntegrityError):
+            with transaction.atomic():
+                profile2 = Profile.objects.create(user=user,
+                                                  birth_date=datetime.date(
+                                                      1998, 12, 24),
+                                                  )

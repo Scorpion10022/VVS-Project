@@ -16,5 +16,4 @@ urlpatterns = [
          views.add_lesson, name="add_lesson_page"),
     path('delete/<str:course_title>/<int:lesson_id>',
          views.delete_lesson, name="delete_lesson_page"),
-
 ]

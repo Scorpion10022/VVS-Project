@@ -1,6 +1,7 @@
 from django.db import models
 import datetime
 
+
 class Course(models.Model):
     course_id = models.AutoField(primary_key=True)
     course_title = models.CharField(max_length=50, unique=True)
@@ -12,8 +13,9 @@ class Course(models.Model):
     def save(self, *args, **kwargs):
         if len(self.course_title) > 50:
             raise ValueError("Course title limit is 50.")
-        if len(self.course_description) > 300:
-            raise ValueError("Course description limit is 300.")
+        if self.course_description:
+            if len(self.course_description) > 300:
+                raise ValueError("Course description limit is 300.")
         super().save(*args, **kwargs)
 
 
@@ -35,4 +37,11 @@ class Lesson(models.Model):
             raise ValueError("Lesson description limit is 150.")
         if self.date_posted > datetime.date.today():
             raise ValueError("Date can not be in the future.")
+        course = self.course
+        lessons_for_course = Lesson.objects.filter(course=course)
+        for lesson in lessons_for_course:
+            if lesson.lesson_id == self.lesson_id:
+                raise ValueError(
+                    "Two lessons from the same course ca not have the same id.")
+                break
         super().save(*args, **kwargs)
