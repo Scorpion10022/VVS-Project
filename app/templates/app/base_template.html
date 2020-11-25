@@ -34,7 +34,11 @@
         </li>
       </ul>
       {% if request.user.is_authenticated %}
-      <!-- De Facut LOGout -->
+      <!-- <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'app:create_lesson_or_course' %}">Add Lesson/Course <span class="sr-only">(current)</span></a>
+        </li>
+      </ul> -->
       <ul class="navbar-nav">
         <li class="nav-item active">
           <a class="nav-link" href="{% url 'user:logout' %}?next={% url 'app:index' %}">Log Out <span class="sr-only">(current)</span></a>
