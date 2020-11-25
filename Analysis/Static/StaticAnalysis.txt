@@ -1,0 +1,8 @@
+After code inspection no severe errors were found.
+The numbers are: 2 errors, 21 warnings, 97 weak warnings and 13 typos.
+HTML: 2 missing associated labels - input tags have no ending tags (</input) - there's not really a need for them to exist
+Javascript: No locally stored library for Boothstrap link.
+Python: 2 errors from unresolved reference and import of a django core package (django.core.asgi)
+    Some warnings from unused variables(solved)
+    Most weak warnings come from missing docstrings, or shadowing variable names from outer scopes
+Typos: Most of the typos come from acronyms or shortened words.

@@ -24,7 +24,7 @@ class CourseTestCase(TestCase):
 
     def test_get_nonexistent_object_from_db(self):
         with self.assertRaises(exceptions.ObjectDoesNotExist):
-            course = Course.objects.get(course_id=2)
+            Course.objects.get(course_id=2)
 
     def test_create_new_object(self):
         Course.objects.create(course_title="Course2",
@@ -148,7 +148,7 @@ class TemplateTest(TestCase):
 
     def test_nonexistent_course_view(self):
         with self.assertRaises(exceptions.ObjectDoesNotExist):
-            response = self.client.get('/course/VVS2/')
+            self.client.get('/course/VVS2/')
 
     def test_course_view_invalid_url(self):
         response = self.client.get('/course/VVS')
@@ -160,4 +160,4 @@ class TemplateTest(TestCase):
 
     def test_nonexistent_lesson_view(self):
         with self.assertRaises(exceptions.ObjectDoesNotExist):
-            response = self.client.get('/course/VVS/1241/')
+            self.client.get('/course/VVS/1241/')

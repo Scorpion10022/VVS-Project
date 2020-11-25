@@ -11,11 +11,13 @@ import datetime
 
 class UserTest(TestCase):
     def setUp(self):
+        print("Set up")
         self.factory = RequestFactory()
         self.user = User.objects.create_user(
             username='denis', email='denis@mail.com', password='top_secret')
 
     def tearDown(self):
+        print("tearDown up")
         User.objects.get(username='denis').delete()
 
     def test_view_user_page_logged_user(self):
@@ -45,13 +47,13 @@ class UserTest(TestCase):
 
     def test_create_duplicate_profile_for_user(self):
         user = User.objects.get(username='denis')
-        profile = Profile.objects.create(user=user,
+        Profile.objects.create(user=user,
                                          birth_date=datetime.date(
                                              1998, 12, 24),
                                          )
         with self.assertRaises(utils.IntegrityError):
             with transaction.atomic():
-                profile2 = Profile.objects.create(user=user,
+                Profile.objects.create(user=user,
                                                   birth_date=datetime.date(
                                                       1998, 12, 24),
                                                   )

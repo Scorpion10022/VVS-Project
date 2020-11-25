@@ -1,6 +1,4 @@
 from django.shortcuts import get_object_or_404, render
-from django.urls import reverse
-from django.views import generic
 
 from .forms import LessonForm, CourseForm
 from .models import Course, Lesson
@@ -35,32 +33,32 @@ def lesson(request, course_title, lesson_id):
             user_id=profile, lesson_id=lesson)
     except Exception:
         added_lesson = None
-    lesson_already_added = True if added_lesson else False
 
     context = {'lesson': lesson, 'added_lesson': added_lesson}
     return render(request, 'app/lesson.html', context)
 
 
 def create_new_lesson_course(request):
-    # if this is a POST request we need to process the form data
-    if request.method == 'POST':
-        # create a form instance and populate it with data from the request:
-        form = CourseForm(request.POST)
-        # check whether it's valid:
-        if form.is_valid():
-
-            course = Course()
-            course.course_title = form.cleaned_data['course_title']
-            course.course_description = form.cleaned_data['course_description']
-
-            course.save()
-            # process the data in form.cleaned_data as required
-            # ...
-            # redirect to a new URL:
-            return HttpResponseRedirect('/thanks/')
+    pass
+    # # if this is a POST request we need to process the form data
+    # if request.method == 'POST':
+    #     # create a form instance and populate it with data from the request:
+    #     form = CourseForm(request.POST)
+    #     # check whether it's valid:
+    #     if form.is_valid():
+    #
+    #         course = Course()
+    #         course.course_title = form.cleaned_data['course_title']
+    #         course.course_description = form.cleaned_data['course_description']
+    #
+    #         course.save()
+    #         # process the data in form.cleaned_data as required
+    #         # ...
+    #         # redirect to a new URL:
+    #         return HttpResponseRedirect('/thanks/')
 
     # if a GET (or any other method) we'll create a blank form
-    else:
-        form = CourseForm()
-
-    return render(request, 'app/create_lesson_course.html', {'form': form})
+    # else:
+    #     form = CourseForm()
+    #
+    # return render(request, 'app/create_lesson_course.html', {'form': form})
