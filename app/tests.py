@@ -55,8 +55,9 @@ class CourseTestCase(TestCase):
 
     def test_create_new_object_with_title_more_than_50(self):
         with self.assertRaises(ValueError):
-            Course.objects.create(course_title="Course1Course1Course1Course1Course1Course1Course1Course1Course1Course1Course1Course1Course1Course1Course1Course1Course1Course1",
-                                  course_description="Course1 Description")
+            Course.objects.create(
+                course_title="Course1Course1Course1Course1Course1Course1Course1Course1Course1Course1Course1Course1Course1Course1Course1Course1Course1Course1",
+                course_description="Course1 Description")
 
 
 class LessonTestCase(TestCase):

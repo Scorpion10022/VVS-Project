@@ -4,8 +4,8 @@
 
 <div class="card">
   <div class="card-body">
-    <h5 class="card-title"><a href="{% url 'app:course_view' course.course_title %}" style="text-decoration: none; color: black">{{ course.course_title }} </a></h5>
-    <p class="card-text">{{ course.course_description }}</p>
+    <h5 class="card-title" id="course_title"><a href="{% url 'app:course_view' course.course_title %}" style="text-decoration: none; color: black">{{ course.course_title }} </a></h5>
+    <p class="card-text" id="course_description">{{ course.course_description }}</p>
   </div>
 </div>
 
@@ -14,7 +14,7 @@
   {% if lesson.course == course %}
     <div class="col-md-4">
       <div class="card mb-4 shadow-sm">
-        <div class="card-body">
+        <div class="card-body" id="lesson_card">
           <p class="card-title">{{ lesson.lesson_title }}</p>
           <p class="card-text">{{ lesson.lesson_description }}</p>
           <div class="d-flex justify-content-between align-items-center">

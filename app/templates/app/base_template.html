@@ -30,7 +30,7 @@
       </ul>
       <ul class="navbar-nav">
         <li class="nav-item active">
-          <a class="nav-link" href="{% url 'user:user_page' %}">Account <span class="sr-only">(current)</span></a>
+          <a class="nav-link" id="account_button" href="{% url 'user:user_page' %}">Account <span class="sr-only">(current)</span></a>
         </li>
       </ul>
       {% if request.user.is_authenticated %}
@@ -41,7 +41,7 @@
       </ul> -->
       <ul class="navbar-nav">
         <li class="nav-item active">
-          <a class="nav-link" href="{% url 'user:logout' %}?next={% url 'app:index' %}">Log Out <span class="sr-only">(current)</span></a>
+          <a class="nav-link" id="logout_button" href="{% url 'user:logout' %}?next={% url 'app:index' %}">Log Out <span class="sr-only">(current)</span></a>
         </li>
       </ul>
       {% endif %}

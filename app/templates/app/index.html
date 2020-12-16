@@ -3,8 +3,8 @@
 {% block content %}
 
 {% for course in courses %}
-  <div class="card">
-    <div class="card-body">
+  <div class="card col-md-12">
+    <div class="card-body" id="course_card">
       <h5 class="card-title"><a href="{% url 'app:course_view' course.course_title %}" style="text-decoration: none; color: black">{{ course.course_title }} </a></h5>
       <p class="card-text">{{ course.course_description }}</p>
     </div>
@@ -15,12 +15,12 @@
     {% if lesson.course == course %}
       <div class="col-md-4">
         <div class="card mb-4 shadow-sm">
-          <div class="card-body">
-            <p class="card-title">{{ lesson.lesson_title }}</p>
-            <p class="card-text">{{ lesson.lesson_description }}</p>
+          <div class="card-body" id="lesson_card">
+            <p class="card-title" id="lesson_title">{{ lesson.lesson_title }}</p>
+            <p class="card-text" id="lesson_description">{{ lesson.lesson_description }}</p>
             <div class="d-flex justify-content-between align-items-center">
               <div class="btn-group">
-                <a href="{% url 'app:lesson_view' course.course_title lesson.lesson_id %}" class="btn btn-sm btn-outline-secondary">View</a>
+                <a id="view_lesson_button" href="{% url 'app:lesson_view' course.course_title lesson.lesson_id %}" class="btn btn-sm btn-outline-secondary">View</a>
               </div>
               <small class="text-muted">{{ lesson.date_posted }}</small>
             </div>

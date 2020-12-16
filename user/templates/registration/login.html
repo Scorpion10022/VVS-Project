@@ -3,7 +3,7 @@
 {% block content %}
 
 {% if form.errors %}
-<p>Your username and password didn't match. Please try again.</p>
+<p id="invalid_login">Your username and password didn't match. Please try again.</p>
 {% endif %}
 
 {% if next %}
@@ -30,7 +30,7 @@
         <td>{{ form.password }}</td>
     </tr>
     </table>
-    <input class="btn btn-sm btn-outline-secondary" type="submit" value="Log In">
+    <input class="btn btn-sm btn-outline-secondary" id="login_button" type="submit" value="Log In">
     <input type="hidden" name="next" value="{{ next }}">
     <div class="btn-group">
       <a href="" class="btn btn-sm btn-outline-secondary disabled">Reset Password</a>
@@ -41,7 +41,7 @@
 </div>
 
 <div class="btn-group float-right">
-  <a href="{% url 'user:create_user' %}" class="btn btn-sm btn-outline-secondary">Create Account</a>
+  <a id="create_account_button" href="{% url 'user:create_user' %}" class="btn btn-sm btn-outline-secondary">Create Account</a>
 </div>
 
 
