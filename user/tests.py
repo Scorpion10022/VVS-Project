@@ -87,7 +87,6 @@ class SeleniumTests(TestCase):
             self.assertEqual('http://127.0.0.1:8000/course/VVS/1/', driver.current_url)
             self.assertEqual('Introducere', driver.find_element_by_id('lesson_title').text)
 
-    # Not yet finished, to ask about it
     def test_view_more_lessons_from_one_course(self):
         with Chrome() as driver:
             driver.get("http://127.0.0.1:8000/")
